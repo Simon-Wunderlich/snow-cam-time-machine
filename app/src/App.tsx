@@ -62,7 +62,7 @@ function App() {
           <Carousel.ItemGroup>
             {images.map((image, index) => {
               return <Carousel.Item index={index}>
-                <Image src={"https://www.fallscreek.com.au/wp-content/uploads/cam-fc-drovers.jpg"}/>
+                <Image src={image.path}/>
                 <Text>{image.name} - {image.resort}</Text>
               </Carousel.Item>
             })}
