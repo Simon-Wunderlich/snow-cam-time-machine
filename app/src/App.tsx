@@ -1,120 +1,89 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
-import heroImg from './assets/hero.png'
 import './App.css'
+import {Text, Carousel, IconButton, Image, VStack} from "@chakra-ui/react"
+import dayjs from "dayjs";
+import {LuChevronLeft, LuChevronRight} from "react-icons/lu";
 
 function App() {
-  const [count, setCount] = useState(0)
+  const date = dayjs(new Date()).format("DD-MM-YYYY");
+
+  const images = [
+    {
+      "resort" : "Hotham",
+      "name" : "Big D",
+      "path" : `/assets/hotham/big-d/${date}.jpg`
+    },
+    {
+      "resort" : "Hotham",
+      "name" : "Gotcha",
+      "path" :`/assets/hotham/gotcha/${date}.jpg`
+    },
+    {
+      "resort" : "Hotham",
+      "name" : "Imagine",
+      "path" : `/assets/hotham/imagine/${date}.jpg`
+    },
+    {
+      "resort" : "Hotham",
+      "name" : "Slalom Gully",
+      "path" :`/assets/hotham/slalom-gully/${date}.jpg`
+    },
+    {
+      "resort" : "Hotham",
+      "name" : "Summit",
+      "path" :`/assets/hotham/summit/${date}.jpg`
+    },
+    {
+      "resort" : "Falls Creek",
+      "name" : "Drovers Dream",
+      "path" :`/assets/falls-creek/drovers/${date}.jpg`
+    },
+    {
+      "resort" : "Falls Creek",
+      "name" : "Main Street",
+      "path" :`/assets/falls-creek/main-street/${date}.jpg`
+    },
+    {
+      "resort" : "Falls Creek",
+      "name" : "Ruined Castle",
+      "path" :`/assets/falls-creek/ruined-castle/${date}.jpg`
+    },
+    {
+      "resort" : "Falls Creek",
+      "name" : "Towers",
+      "path" :`/assets/falls-creek/towers/${date}.jpg`
+    }
+  ]
 
   return (
     <>
-      <section id="center">
-        <div className="hero">
-          <img src={heroImg} className="base" width="170" height="179" alt="" />
-          <img src={reactLogo} className="framework" alt="React logo" />
-          <img src={viteLogo} className="vite" alt="Vite logo" />
-        </div>
-        <div>
-          <h1>Get started</h1>
-          <p>
-            Edit <code>src/App.tsx</code> and save to test <code>HMR</code>
-          </p>
-        </div>
-        <button
-          type="button"
-          className="counter"
-          onClick={() => setCount((count) => count + 1)}
-        >
-          Count is {count}
-        </button>
-      </section>
+      <VStack>
+        <Text textStyle={"2xl"}>This time last year</Text>
+        <Carousel.Root slideCount={images.length} maxW="md" mx="auto">
+          <Carousel.ItemGroup>
+            {images.map((image, index) => {
+              return <Carousel.Item index={index}>
+                <Image src={"https://www.fallscreek.com.au/wp-content/uploads/cam-fc-drovers.jpg"}/>
+                <Text>{image.name} - {image.resort}</Text>
+              </Carousel.Item>
+            })}
+          </Carousel.ItemGroup>
+          <Carousel.Control justifyContent="center" gap="4">
+            <Carousel.PrevTrigger asChild>
+              <IconButton size="xs" variant="ghost">
+                <LuChevronLeft />
+              </IconButton>
+            </Carousel.PrevTrigger>
 
-      <div className="ticks"></div>
+            <Carousel.Indicators />
 
-      <section id="next-steps">
-        <div id="docs">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#documentation-icon"></use>
-          </svg>
-          <h2>Documentation</h2>
-          <p>Your questions, answered</p>
-          <ul>
-            <li>
-              <a href="https://vite.dev/" target="_blank">
-                <img className="logo" src={viteLogo} alt="" />
-                Explore Vite
-              </a>
-            </li>
-            <li>
-              <a href="https://react.dev/" target="_blank">
-                <img className="button-icon" src={reactLogo} alt="" />
-                Learn more
-              </a>
-            </li>
-          </ul>
-        </div>
-        <div id="social">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#social-icon"></use>
-          </svg>
-          <h2>Connect with us</h2>
-          <p>Join the Vite community</p>
-          <ul>
-            <li>
-              <a href="https://github.com/vitejs/vite" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#github-icon"></use>
-                </svg>
-                GitHub
-              </a>
-            </li>
-            <li>
-              <a href="https://chat.vite.dev/" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#discord-icon"></use>
-                </svg>
-                Discord
-              </a>
-            </li>
-            <li>
-              <a href="https://x.com/vite_js" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#x-icon"></use>
-                </svg>
-                X.com
-              </a>
-            </li>
-            <li>
-              <a href="https://bsky.app/profile/vite.dev" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#bluesky-icon"></use>
-                </svg>
-                Bluesky
-              </a>
-            </li>
-          </ul>
-        </div>
-      </section>
-
-      <div className="ticks"></div>
-      <section id="spacer"></section>
+            <Carousel.NextTrigger asChild>
+              <IconButton size="xs" variant="ghost">
+                <LuChevronRight />
+              </IconButton>
+            </Carousel.NextTrigger>
+          </Carousel.Control>
+        </Carousel.Root>
+      </VStack>
     </>
   )
 }
