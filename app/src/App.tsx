@@ -57,7 +57,6 @@ function App() {
   return (
     <>
       <VStack>
-        <Text textStyle={"2xl"}>This time last year</Text>
         <Carousel.Root slideCount={images.length} maxW="md" mx="auto">
           <Carousel.ItemGroup>
             {images.map((image, index) => {
